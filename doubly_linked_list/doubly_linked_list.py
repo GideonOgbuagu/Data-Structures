@@ -57,18 +57,45 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
     def remove_from_head(self):
-        pass
-        # store the value of the head
-        # decrement the length of the DLL
-        # delete the head
-            # if head.next is not None
-                # set head.next's prev to None
-                # set head to head.next
-            # else (if head.next is None)
-                # set head to None
-                # set tail to None
+        # pass
+        # # return None if there is no head (i.e. the list is empty)
+        # if not self.head:
+        #     return None
+        # # store the value of the head
+        # value = self.head
+        # # decrement the length of the DLL
+        # self.length -= 1
+        # # delete the head
+        # self.head = None
+        #     # if head.next is not None
+        # if self.head.next is not None:
+        #     # set head.next's prev to None
+        #     self.head.prev = None
+        #     # set head to head.next
+        #     self.head = self.head.next
+        #     value.next = None
+                
+                
+        # # else (if head.next is None)
 
-        # return the value
+        #     # set head to None
+        #     # set tail to None
+
+        # # return the value
+        if self.length == 0:
+            return None
+        old_head = self.head
+        if self.head.next is None:
+            self.head = None
+            self.tail = None
+        else:
+            self.head = old_head.next
+            self.head.prev = None
+            old_head.next = None
+        
+        self.length -= 1
+        return old_head
+        
             
     """
     Wraps the given value in a ListNode and inserts it 
@@ -78,15 +105,23 @@ class DoublyLinkedList:
     def add_to_tail(self, value):
         pass
         # create instance of ListNode with value
+        new_node = ListNode(value)
         # increment the DLL length attribute
-
+        self.length += 1
         # if DLL is empty
+        if not self.head:
             # set head and tail to the new node instance
+            self.head = new_node
+            self.tail = new_node
         
         # if DLL is not empty
+        else:
             # set new node's prev to current tail
+            new_node.prev = self.tail
             # set tail's next to new node
+            self.tail.next = new_node
             # set tail to the new node
+            self.tail = new_node
             
     """
     Removes the List's current tail node, making the 
