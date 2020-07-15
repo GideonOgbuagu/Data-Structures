@@ -11,7 +11,10 @@ class ListNode:
         self.next = next
 
     def delete(self):
-        pass
+        if self.prev:
+            self.prev.next = self.next
+        if self.next:
+            self.next.prev = self.prev
 
 
 """
@@ -175,16 +178,15 @@ class DoublyLinkedList:
 
     def move_to_front(self, node):
         # pass
-        current = self.head
-        while current.next:
-            if current == node:
-                node = self.head
-                
-            return current
-        self.head.prev = current
-        self.head = current
-        current.prev = None
-        current.next = self.head
+        if node is self.head:
+            return
+        value = node.value
+        if node is self.tail:
+            self.remove_from_tail()
+        else:
+            node.delete()
+            self.length -= 1
+        self.add_to_head(value)
         
 
     """
@@ -193,7 +195,17 @@ class DoublyLinkedList:
     """
 
     def move_to_end(self, node):
-        pass
+        # pass
+        if node is self.tail:
+            return 
+        value = node.value
+        if node is self.head:
+            self.remove_from_head
+            self.add_to_tail(value)
+        else:
+            node.delete()
+            self.length -= 1
+            self.add_to_tail(value)
 
     """
     Deletes the input node from the List, preserving the 
@@ -201,7 +213,21 @@ class DoublyLinkedList:
     """
 
     def delete(self, node):
-        pass
+        
+        if not self.head and not self.tail:
+            return
+        self.length -= 1
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+        elif self.head == node:
+            self.head = node.next
+            node.delete()
+        elif self.tail == node:
+            self.tail = node.prev
+            node.delete()
+        else:
+            node.delete()
 
     """
     Finds and returns the maximum value of all the nodes 
@@ -209,19 +235,20 @@ class DoublyLinkedList:
     """
 
     def get_max(self):
-        pass
+        # pass
         if not self.head:
             return None
         # reference to the largest value we've seen so far
         max_value = self.head.value
         # reference to our current node as we traverse the list
-        current = self.head.next
+        current = self.head
         # check to see if the current value is greater than the max_value
-        if current.value > max_value:
-                # if so, update our max_value variable
-                max_value = current.val
-            # update thk to see if we're still at a valid list node
         while current:
+            if current.value > max_value:
+                # if so, update our max_value variable
+                max_value = current.value
+            # update thk to see if we're still at a valid list node
+        
             # chece current node to the next node in the list
             current = current.next
         return max_value
