@@ -38,26 +38,38 @@ class DoublyLinkedList:
     the old head node's previous pointer accordingly.
     """
 
+    # def add_to_head(self, value):
+    #     # pass
+    #     # create instance of ListNode with value
+    #     new_node = ListNode(value)
+    #     # increment the DLL length attribute
+    #     self.length += 1
+    #     # if DLL is empty
+    #     if self.length == 0:
+    #         # set head and tail to the new node instance
+    #         self.head = new_node
+    #         self.tail = new_node
+
+    #     # if DLL is not empty
+    #     else:
+    #         # set new node's next to current head
+    #         new_node.next = self.head
+    #         # set head's prev to new node
+    #         self.head.prev = new_node
+    #         # set head to the new node
+    #         self.head = new_node
     def add_to_head(self, value):
-        # pass
-        # create instance of ListNode with value
-        new_node = ListNode(value)
-        # increment the DLL length attribute
+        # $%$Start
+        new_node = ListNode(value, None, None)
         self.length += 1
-        # if DLL is empty
-        if self.length == 0:
-            # set head and tail to the new node instance
+        if not self.head and not self.tail:
             self.head = new_node
             self.tail = new_node
-
-        # if DLL is not empty
         else:
-            # set new node's next to current head
             new_node.next = self.head
-            # set head's prev to new node
             self.head.prev = new_node
-            # set head to the new node
             self.head = new_node
+        # $%$End
 
     """
     Removes the List's current head node, making the
@@ -65,32 +77,33 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
 
-    def remove_from_head(self):
-        # pass
-        # return None if there is no head (i.e. the list is empty)
-        if not self.head:
-            return None
-        # store the value of the head
-        old_head = self.head
-        # decrement the length of the DLL
-        self.length -= 1
-        # delete the head
-        self.head = None
-        # if head.next is not None
-        if self.head.next is not None:
-            # set head.next's prev to None
-            self.head.prev = None
-            # set head to head.next
-            self.head = old_head.next
-            old_head.next = None
+    # def remove_from_head(self):
+    #     # pass
+    #     # return None if there is no head (i.e. the list is empty)
+    #     if not self.head:
+    #         return None
+    #     # store the value of the head
+    #     old_head = self.head
+    #     # decrement the length of the DLL
+    #     self.length -= 1
+    #     # delete the head
+    #     self.head = None
+    #     # if head.next is not None
+    #     if self.head.next == None:
+    #         # set head.next's prev to None
+    #         self.head.prev = None
+    #         # set head to head.next
+    #         self.head = old_head.next
+    #         old_head.next = None
 
-        elif self.head.next is None:
-            # set head to None
-            self.head = None
-            # set tail to None
-            self.tail = None
+    #     elif self.head.next is None:
+    #         # set head to None
+    #         self.head = None
+    #         # set tail to None
+    #         self.tail = None
 
-        return old_head
+    #     return old_head
+
         # if self.length == 0:
         #     return None
         # old_head = self.head
@@ -105,6 +118,13 @@ class DoublyLinkedList:
         # self.length -= 1
         # return old_head
 
+    def remove_from_head(self):
+        # $%$Start
+        value = self.head.value
+        self.delete(self.head)
+        return value
+        # $%$End
+
     """
     Wraps the given value in a ListNode and inserts it 
     as the new tail of the list. Don't forget to handle 
@@ -112,7 +132,7 @@ class DoublyLinkedList:
     """
 
     def add_to_tail(self, value):
-        pass
+        # pass
         # create instance of ListNode with value
         new_node = ListNode(value)
         # increment the DLL length attribute
@@ -138,28 +158,28 @@ class DoublyLinkedList:
     Returns the value of the removed Node.
     """
 
-    def remove_from_tail(self):
-        #     pass
-        # store the value of the tail
-        removed = self.tail
-        # decrement the length of the DLL
-        self.length -= 1
-        # delete the tail
-        self.tail = None
-        # if tail.prev is not None
-        if self.tail.prev is not None:
-            # set tail.prev's next to None
-            self.tail.prev.next = None
-            # set tail to tail.prev
-            self.tail = removed.prev
-        # else (if tail.prev is None)
-        elif self.tail.prev is None:
-            # set head to None
-            self.head = None
-            # set tail to None
-            self.tail = None
-    # return the value
-        return removed
+    # def remove_from_tail(self):
+    #     #     pass
+    #     # store the value of the tail
+    #     removed = self.tail
+    #     # decrement the length of the DLL
+    #     self.length -= 1
+    #     # delete the tail
+    #     self.tail = None
+    #     # if tail.prev is not None
+    #     if self.tail.prev is not None:
+    #         # set tail.prev's next to None
+    #         self.tail.prev.next = None
+    #         # set tail to tail.prev
+    #         self.tail = removed.prev
+    #     # else (if tail.prev is None)
+    #     elif self.tail.prev is None:
+    #         # set head to None
+    #         self.head = None
+    #         # set tail to None
+    #         self.tail = None
+    # # return the value
+    #     return removed
 
         # if self.head == None:
         #     return None
@@ -170,6 +190,13 @@ class DoublyLinkedList:
         #     removed.prev = None
         # self.length -= 1
         # return removed
+
+    def remove_from_tail(self):
+        # $%$Start
+        value = self.tail.value
+        self.delete(self.tail)
+        return value
+        # $%$End
 
     """
     Removes the input node from its current spot in the 
@@ -200,7 +227,7 @@ class DoublyLinkedList:
             return 
         value = node.value
         if node is self.head:
-            self.remove_from_head
+            self.remove_from_head()
             self.add_to_tail(value)
         else:
             node.delete()
