@@ -1,3 +1,9 @@
+# import os
+# import sys
+# sys.path.append(f'{os.getcwd()}/singly_linked_list')
+# from singly_linked_list import LinkedList, Node
+
+
 # To import class from another directory
 # Run in the terminal (inside your stack & queue directories):  
 # ln -s ../singly_linked_list/singly_linked_list.py ./
